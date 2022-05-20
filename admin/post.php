@@ -10,6 +10,7 @@
               </div>
               <div class="col-md-12">
               <?php
+              
                   include "config.php";
                   $limit = 3;         //how many records display on one page 
                  if(isset($_GET['page'])){
