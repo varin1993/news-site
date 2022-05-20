@@ -2,7 +2,8 @@
 if(isset($_POST['save']))
 {
     include "config.php";
-   
+    if( $_SESSION["user_role"] == '0')
+    header("Location: {$hostname}/admin/users.php");
 
   $fname = mysqli_real_escape_string($conn, $_POST['fname']);   //input items in form  
   $lname = mysqli_real_escape_string($conn,$_POST['lname']); // use mysqli real string fun use for protection any user type in form items any special chrctr,html tag jv script run nhi hogi
