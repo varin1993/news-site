@@ -1,4 +1,5 @@
 <?php include "header.php"; ?>
+
   <div id="admin-content">
       <div class="container">
          <div class="row">
@@ -7,7 +8,7 @@
              </div>
               <div class="col-md-offset-3 col-md-6">
                   <!-- Form -->
-                  <form  action="" method="POST" enctype="multipart/form-data">
+                  <form  action="save-post.php" method="POST" enctype="multipart/form-data">
                       <div class="form-group">
                           <label for="post_title">Title</label>
                           <input type="text" name="post_title" class="form-control" autocomplete="off" required>
@@ -19,8 +20,23 @@
                       <div class="form-group">
                           <label for="exampleInputPassword1">Category</label>
                           <select name="category" class="form-control">
-                              <option value="" selected> Select Category</option>
-                          </select>
+                              <option disabled> Select Category</option> <!--disabled use  to user not click on select category-->
+                          <?php
+                            include "config.php";
+                            $sql = "SELECT * FROM category";
+                            $result = mysqli_query($conn,$sql) or die("query failed");
+                            if(mysqli_num_rows($result) > 0)
+                            {
+                                
+                                while($row = mysqli_fetch_assoc($result))
+                                {
+                                 echo "<option value ='{$row['category_id']}'>{$row['category_name']}</option>";
+                              
+                                }
+                            }
+
+                            ?>
+                            </select>
                       </div>
                       <div class="form-group">
                           <label for="exampleInputPassword1">Post image</label>
