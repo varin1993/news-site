@@ -36,6 +36,7 @@
                   $result = mysqli_query($conn,$sql) or die("query failed. "); //querry run use fun 
                   if(mysqli_num_rows($result) > 0 )
                   {
+                      
                   ?>
                   <table class="content-table">
                       <thead>
@@ -48,8 +49,13 @@
                           <th>Delete</th>
                       </thead>
                       <tbody>
-                      <?php while($row = mysqli_fetch_assoc($result))
-                      {?>
+                          
+                      <?php
+                      
+                      while($row = mysqli_fetch_assoc($result))
+                      {
+                      
+                          ?>
                           <tr>
                               <td class='id'><?php echo $row['post_id'];?></td>
                               <td><?php echo $row['title']; ?></td>
@@ -58,18 +64,22 @@
                               <td><?php echo $row['username']; ?></td>
                               <td class='edit'><a href='update-post.php?id=<?php echo $row['post_id']; ?>'><i class='fa fa-edit'></i></a></td>
                               <td class='delete'><a href='delete-post.php?id=<?php echo $row['post_id']; ?>&catid=<?php echo $row['category']; ?>'><i class='fa fa-trash-o'></i></a></td>
-                          </tr>                          <!--line 59 main & catid use to dlt post from category  and line 23 SQL SELECT main add category*/
+                          </tr>                          <!--line 59 main & catid use to dlt post from category  and line 23 SQL SELECT main add category*-->
                           <?php 
-                        } ?>
+
+                        } 
+                        ?>
                       </tbody>
                   </table>
                   <?php 
                   }
                   $sql1 = "SELECT * FROM post";//user tables say record fetch krke leker ane k liye
-                  $result1 = mysqli_query($conn,$sql1) or die("query failed");
+                   $result1 = mysqli_query($conn,$sql1) or die("query failed");
+                 
                   if(mysqli_num_rows($result1) > 0)
                   {
                       $total_records = mysqli_num_rows($result1);
+                     
                      
                       $total_page = ceil($total_records / $limit);
                      echo '<ul class="pagination admin-pagination">';
