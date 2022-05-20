@@ -10,6 +10,7 @@
               </div>
               <div class="col-md-12">
               <?php
+              
                   include "config.php";
                   $limit = 3;         //how many records display on one page 
                  if(isset($_GET['page'])){
@@ -20,13 +21,13 @@
                  
                   $offset = ($page - 1) * $limit;                 
                     if($_SESSION["user_role"] == '1'){ //check already login or not
-                        $sql = "SELECT post.post_id, post.title, post.description,post.post_date, category.category_name,user.username FROM post 
+                        $sql = "SELECT post.post_id, post.title, post.description,post.post_date, category.category_name,user.username,post.category FROM post 
                         LEFT JOIN  category ON post.category =category.category_id
                         LEFT JOIN user ON post.author = user.user_id
                         ORDER BY post.post_id DESC LIMIT {$offset},{$limit}";
       
 }                   elseif($_SESSION["user_role"] == '0'){
-                        $sql = "SELECT post.post_id, post.title, post.description,post.post_date, category.category_name,user.username FROM post 
+                        $sql = "SELECT post.post_id, post.title, post.description,post.post_date, category.category_name,user.username,post.category FROM post 
                         LEFT JOIN  category ON post.category =category.category_id
                         LEFT JOIN user ON post.author = user.user_id
                        WHERE post.author ={$_SESSION['user_id']}
@@ -35,6 +36,7 @@
                   $result = mysqli_query($conn,$sql) or die("query failed. "); //querry run use fun 
                   if(mysqli_num_rows($result) > 0 )
                   {
+                      
                   ?>
                   <table class="content-table">
                       <thead>
@@ -47,8 +49,13 @@
                           <th>Delete</th>
                       </thead>
                       <tbody>
-                      <?php while($row = mysqli_fetch_assoc($result))
-                      {?>
+                          
+                      <?php
+                      
+                      while($row = mysqli_fetch_assoc($result))
+                      {
+                      
+                          ?>
                           <tr>
                               <td class='id'><?php echo $row['post_id'];?></td>
                               <td><?php echo $row['title']; ?></td>
@@ -56,19 +63,23 @@
                               <td><?php echo $row['post_date']; ?></td>
                               <td><?php echo $row['username']; ?></td>
                               <td class='edit'><a href='update-post.php?id=<?php echo $row['post_id']; ?>'><i class='fa fa-edit'></i></a></td>
-                              <td class='delete'><a href='delete-post.php?id=<?php echo $row['post_id']; ?>'><i class='fa fa-trash-o'></i></a></td>
-                          </tr>                          
+                              <td class='delete'><a href='delete-post.php?id=<?php echo $row['post_id']; ?>&catid=<?php echo $row['category']; ?>'><i class='fa fa-trash-o'></i></a></td>
+                          </tr>                          <!--line 59 main & catid use to dlt post from category  and line 23 SQL SELECT main add category*-->
                           <?php 
-                        } ?>
+
+                        } 
+                        ?>
                       </tbody>
                   </table>
                   <?php 
                   }
                   $sql1 = "SELECT * FROM post";//user tables say record fetch krke leker ane k liye
-                  $result1 = mysqli_query($conn,$sql1) or die("query failed");
+                   $result1 = mysqli_query($conn,$sql1) or die("query failed");
+                 
                   if(mysqli_num_rows($result1) > 0)
                   {
                       $total_records = mysqli_num_rows($result1);
+                     
                      
                       $total_page = ceil($total_records / $limit);
                      echo '<ul class="pagination admin-pagination">';
