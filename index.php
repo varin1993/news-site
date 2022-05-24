@@ -53,7 +53,7 @@
                                             </span>
                                         </div>
                                         <p class="description">
-                                        <?php echo $row['description'] ?>
+                                        <?php echo substr($row['description'],0,130);?> <!--use substring function for data show only 130 characters -->
                                         </p>
                                         <a class='read-more pull-right' href='single.php?id=<?php echo $row["post_id"] ?>'>read more</a>
                                     </div>
