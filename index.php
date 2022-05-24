@@ -53,7 +53,7 @@
                                             </span>
                                         </div>
                                         <p class="description">
-                                        <?php echo substr($row['description'],0,130);?> <!--use substring function for data show only 130 characters -->
+                                        <?php echo substr($row['description'],0,130) . "..." ;?> <!--use substring function for data show only 130 characters -->
                                         </p>
                                         <a class='read-more pull-right' href='single.php?id=<?php echo $row["post_id"] ?>'>read more</a>
                                     </div>
@@ -67,9 +67,8 @@
                         {
                             echo "<h2>No Record Found.</h2>";
                         }
-                         ?>
-                        </div>
-                        <?php
+                         
+                       
                          $sql1 = "SELECT * FROM post";//user tables say record fetch krke leker ane k liye
                          $result1 = mysqli_query($conn,$sql1) or die("query failed");
                        
