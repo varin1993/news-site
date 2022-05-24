@@ -12,7 +12,7 @@
                         $sql = "SELECT post.post_id, post.title, post.description,post.post_date, category.category_name,user.username,post.category,post.post_img FROM post 
                         LEFT JOIN  category ON post.category =category.category_id
                         LEFT JOIN user ON post.author = user.user_id
-
+                        
                        WHERE post.post_id = {$post_id}"; //use only single post show get url id
       
                         $result = mysqli_query($conn,$sql) or die("query failed. "); //querry run use fun 
