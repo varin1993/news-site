@@ -32,7 +32,7 @@
                             </a></span>
                                 <span>
                                     <i class="fa fa-user" aria-hidden="true"></i>
-                                    <a href='author.php'><?php echo $row['category_name'] ?></a>
+                                    <a href='author.php?aid=<?php echo $row['author']?>'><?php echo $row['username'] ?></a>
                                 </span>
                                 <span>
                                     <i class="fa fa-calendar" aria-hidden="true"></i>
