@@ -4,9 +4,13 @@
         <div class="row">
             <div class="col-md-8">
                 <!-- post-container -->
-                <div class="post-container">
-                  <h2 class="page-heading">Category Name</h2>
-                    <div class="post-content">
+                <div class="post-container">                
+               <?php
+                    $sql1 = "SELECT * FROM category WHERE category_id = {$cat_id}";//user tables say record fetch krke leker ane k liye
+                    $result1 = mysqli_query($conn,$sql1) or die("query failed"); /*only one record show according to cat_id*/
+                    $row1 = mysqli_fetch_assoc($result1); 
+                    ?>
+                      <h2 class="page-heading"><?php echo $row1['category_name']?></h2>
                     <?php
                         include "config.php";
                         if(isset($_GET['cid'])){
@@ -74,12 +78,10 @@
                         }
                          
                        
-                         $sql1 = "SELECT post FROM category WHERE category_id = {$cat_id}";//user tables say record fetch krke leker ane k liye
-                         $result1 = mysqli_query($conn,$sql1) or die("query failed");
-                         $row = mysqli_fetch_assoc($result1); /*only one record show according to cat_id*/
+                        
                         if(mysqli_num_rows($result1) > 0)
                         {
-                            $total_records = $row['post']; /*total no of  record in this category show  */
+                            $total_records = $row1['post']; /*total no of  record in this category show  */
                            
                            
                             $total_page = ceil($total_records / $limit);
