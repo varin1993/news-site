@@ -26,7 +26,7 @@
                         $sql = "SELECT post.post_id, post.title, post.description,post.post_date, category.category_name,user.username,post.author,post.category,post.post_img FROM post 
                         LEFT JOIN  category ON post.category =category.category_id
                         LEFT JOIN user ON post.author = user.user_id
-                        WHERE post.title LIKE '%{$search_term}%'   /*use  WHERE this id show news according id* */
+                        WHERE post.title LIKE '%{$search_term}%' OR post.description LIKE '%{$search_term}%' /*use  WHERE this id search title and desc in all posts */
                         ORDER BY post.post_id DESC LIMIT {$offset},{$limit}";
       
                         $result = mysqli_query($conn,$sql) or die("query failed. "); //querry run use fun 
