@@ -74,6 +74,8 @@
                         {
                             echo "<h2>No Record Found.</h2>";
                         }
+
+                        
                           
                         $sql1 = "SELECT * FROM post  /*Search item show */
                          WHERE post.title LIKE '%{$search_term}%'";                         
